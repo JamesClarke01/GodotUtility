@@ -1,3 +1,6 @@
+# About
+First person flight camera intended for debugging use.
+
 # Input Mappings
 Add these to your project!
 
