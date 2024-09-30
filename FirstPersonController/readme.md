@@ -1,4 +1,6 @@
 # Input Mappings
+Add these to your project!
+
 
 | action           | event          |
 | ---------------- | -------------- |
