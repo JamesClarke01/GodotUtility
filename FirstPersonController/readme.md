@@ -15,3 +15,4 @@ Add these to your project!
 | backward         | s              |
 | sprint           | shift          |
 | left_mouse_click | leftMouseClick |
+| escape           | escape         |
