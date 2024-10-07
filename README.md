@@ -1,2 +1,2 @@
-# GodotUtilityScenes
-A collection of portable utility scenes for use in the Godot Engine.
+# GodotUtility
+A collection of utility scenes and projects for use in the Godot Engine.
