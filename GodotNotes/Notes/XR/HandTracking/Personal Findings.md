@@ -1,0 +1,3 @@
+- Detection for pinch is incredibly precise
+	- Grip not so much
+- Some sort of hand model is essential
