@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://nm8px6n81c73"]
+
+[ext_resource type="Script" path="res://root.gd" id="1_mxp6u"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="2_c53c3"]
+[ext_resource type="PackedScene" uid="uid://cxjepfowlijvp" path="res://menu.tscn" id="2_p20yj"]
+[ext_resource type="Script" path="res://menu.gd" id="2_qe72d"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_v2ck3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0vg8y"]
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_mxp6u")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="RightController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="FunctionPointer" parent="XROrigin3D/RightController" instance=ExtResource("2_c53c3")]
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Menu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_qe72d")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Menu/ColorRect"]
+layout_mode = 2
+offset_left = 433.0
+offset_top = 250.0
+offset_right = 736.0
+offset_bottom = 381.0
+text = "Button!"
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.03417)
+mesh = SubResource("BoxMesh_0vg8y")
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("3_v2ck3")]
+transform = Transform3D(0.0017803, 0, 0.00241465, 0, 0.003, 0, -0.00241465, 0, 0.0017803, -2.52601, 0, -2.02064)
+screen_size = Vector2(1280, 720)
+scene = ExtResource("2_p20yj")
+viewport_size = Vector2(1280, 720)
+unshaded = true
+scene_properties_keys = PackedStringArray("menu.gd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.70738, 0)
+
+[connection signal="pressed" from="CanvasLayer/Menu/ColorRect/Button" to="." method="_on_button_pressed"]
