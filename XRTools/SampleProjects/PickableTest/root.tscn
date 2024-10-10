@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://dg8dmmu8yj2pe"]
+
+[ext_resource type="Script" path="res://node_3d.gd" id="1_y074b"]
+[ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="2_jsv0m"]
+[ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="3_d3uti"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="3_ipfhp"]
+[ext_resource type="PackedScene" uid="uid://bcqur2flw64pt" path="res://pickableCube.tscn" id="5_isstr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6hbfj"]
+size = Vector3(5, 0.1, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_in172"]
+size = Vector3(5, 0.1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tqsbu"]
+size = Vector3(0.5, 0.75, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lw70g"]
+albedo_color = Color(0.449611, 0.227526, 0.112732, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_68x2o"]
+material = SubResource("StandardMaterial3D_lw70g")
+size = Vector3(0.5, 0.75, 0.5)
+
+[node name="root" type="Node3D"]
+script = ExtResource("1_y074b")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="XROrigin3D/LeftController" instance=ExtResource("2_jsv0m")]
+
+[node name="FunctionPickup" parent="XROrigin3D/LeftController" instance=ExtResource("3_ipfhp")]
+
+[node name="RightController" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+
+[node name="RightHand" parent="XROrigin3D/RightController" instance=ExtResource("3_d3uti")]
+
+[node name="FunctionPickup" parent="XROrigin3D/RightController" instance=ExtResource("3_ipfhp")]
+grab_distance = 0.1
+ranged_enable = false
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01016, 0)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_6hbfj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_in172")
+
+[node name="Table" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.361726, -0.556538)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00273812)
+shape = SubResource("BoxShape3D_tqsbu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Table"]
+mesh = SubResource("BoxMesh_68x2o")
+
+[node name="PickableCube" parent="." instance=ExtResource("5_isstr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.856763, -0.485974)
+mass = 0.01
+ranged_grab_method = 2
