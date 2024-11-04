@@ -9,12 +9,12 @@ var xr_interface: XRInterface
 var hmd_synchronized:bool = false
 
 func _ready():
-	initXR()
+	init_xr()
 
 func _process(delta: float) -> void:
-	syncHeadsetOrientation()
+	sync_headset_orientation()
 
-func initXR():
+func init_xr():
 	xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # Turn off v-sync
@@ -24,7 +24,7 @@ func initXR():
 	else:
 		print("OpenXR not initialized, please check if your headset is connected")
 
-func syncHeadsetOrientation():
+func sync_headset_orientation():
 	"""
 	Synchronizes headset ORIENTATION as soon as tracking information begins to arrive :
 	"""
