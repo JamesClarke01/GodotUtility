@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 """
 This startup code contains a the startup code from the Godot docs (https://docs.godotengine.org/en/stable/tutorials/xr/setting_up_xr.html)
 It also contains code to synchronise the headset orientation at startup, 

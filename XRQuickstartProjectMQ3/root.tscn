@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://nm8px6n81c73"]
 
-[ext_resource type="Script" path="res://root.gd" id="1_mxp6u"]
+[ext_resource type="Script" path="res://start_xr.gd" id="2_ec5pp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_jq4o6"]
 
 [node name="Root" type="Node3D"]
-script = ExtResource("1_mxp6u")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
@@ -20,3 +19,6 @@ tracker = &"left_hand"
 [node name="DemoCube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.07636)
 mesh = SubResource("BoxMesh_jq4o6")
+
+[node name="StartXR" type="Node" parent="."]
+script = ExtResource("2_ec5pp")
